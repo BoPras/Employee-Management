@@ -34,6 +34,7 @@ export type Employee = {
   lastName: string,
   email: string,
   birthDate: string,
+  basicSalary: number,
   status: boolean,
   group: string,
   discription: string,

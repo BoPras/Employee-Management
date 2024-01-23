@@ -23,7 +23,7 @@ export class LoginComponent {
         Validators.minLength(6),
         Validators.maxLength(25),
       ])],
-      rememberMe: [true]
+      rememberMe: [false]
     })
   }
 

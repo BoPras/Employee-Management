@@ -1,1 +1,15 @@
-<p>profile works!</p>
+<div class="container mt-5">
+    <h2 id="userId">id user adalah {{idUser}}</h2>
+
+    <ul class="list-group">
+        <li class="list-group-item"><strong>Username:</strong> {{userData.username}}</li>
+        <li class="list-group-item"><strong>First Name:</strong> {{userData.firstName}}</li>
+        <li class="list-group-item"><strong>Last Name:</strong> {{userData.lastName}}</li>
+        <li class="list-group-item"><strong>Email:</strong> {{userData.email}}</li>
+        <li class="list-group-item"><strong>Birth Date:</strong> {{userData.birthDate | date: 'yyyy-MM-dd'}}</li>
+        <li class="list-group-item"><strong>Basic Salary:</strong> {{userData.basicSalary | currency: 'Rp. '}}</li>
+        <li class="list-group-item"><strong>Status:</strong> {{userData.status}}</li>
+        <li class="list-group-item"><strong>Group:</strong> {{userData.group}}</li>
+        <li class="list-group-item"><strong>Description:</strong> {{userData.description}}</li>
+    </ul>
+</div>

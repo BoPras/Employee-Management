@@ -1,7 +1,11 @@
 <!-- employee.component.html -->
 
-<div>
+<div id="employeeData">
   <h2>Employee List</h2>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEmployee">
+    Add Employee
+  </button>
   <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
     <thead>
       <tr>
@@ -14,17 +18,188 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let employee of employees">
+      <tr *ngFor="let employee of employees" class="align-middle" [routerLink]="['/employee', employee.id]">
         <td>{{ employee.username }}</td>
         <td>{{ employee.firstName +' '+ employee.lastName}}</td>
         <td>{{ employee.email }}</td>
-        <td>{{ employee.birthDate }}</td>
-        <td>{{ employee.basicSalary}}</td>
+        <td>{{ employee.birthDate | date: 'yyyy-MM-dd'}}</td>
+        <td>{{ employee.basicSalary | currency: 'Rp. '}}</td>
         <td>
-          <button class="btn btn-sm btn-info" (click)="updateEmployee(employee)">Update</button>
-          <button class="btn btn-sm btn-danger" (click)="deleteEmployee(employee)">Delete</button>
+          <button class="btn btn-sm btn-info" (click)="updateEmployee(employee.id)">Update</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteEmployee(employee.id)">Delete</button>
         </td>
       </tr>
     </tbody>
   </table>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="addEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Employee</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="detailForm">
+          <div class="row">
+            <div class="col">
+              <div class="mb-3">
+                <div class="form-group">
+                  <label for="username" class="form-label">Username</label>
+                  <input 
+                  type="text" 
+                  class="form-control" 
+                  id="username"
+                  placeholder="Choose a username"
+                  formControlName="username"
+                  >
+                  <div class="alert alert-danger mt-1"
+                  *ngIf="detailForm.controls['username'].touched &&
+                  !detailForm.controls['username'].valid"
+                  >
+                  <span *ngIf="detailForm.controls['username'].errors?.['required']">Please input username</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input 
+                  type="text" 
+                  class="form-control" 
+                  id="firstName"
+                  placeholder="Enter your first name"
+                  formControlName="firstName"
+                  >
+                  <div class="alert alert-danger mt-1"
+                  *ngIf="detailForm.controls['firstName'].touched &&
+                  !detailForm.controls['firstName'].valid"
+                  >
+                  <span *ngIf="detailForm.controls['firstName'].errors?.['required']">Please input firstName</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="lastName" class="form-label">Last Name</label>
+                  <input 
+                  type="text" 
+                  class="form-control" 
+                  id="lastName"
+                  placeholder="Enter your last name"
+                  formControlName="lastName"
+                  >
+                </div>
+                <div>
+                  <label for="email" class="form-label">Email</label>
+                  <input 
+                  type="email" 
+                  class="form-control" 
+                  id="email"
+                  placeholder="Enter your email"
+                  formControlName="email"
+                  >
+                  <div class="alert alert-danger mt-1"
+                  *ngIf="detailForm.controls['email'].touched &&
+                  !detailForm.controls['email'].valid"
+                  >
+                  <span *ngIf="detailForm.controls['email'].errors?.['required']">Please input email</span>
+                  <span *ngIf="detailForm.controls['email'].errors?.['email']">Please type correct email format</span>
+                  </div>
+                </div>
+                <div>
+                  <label for="birthDate" class="form-label">Birth Date</label>
+                  <input 
+                  type="date" 
+                  class="form-control" 
+                  id="birthDate"
+                  placeholder="Enter your birth date"
+                  formControlName="birthDate"
+                  >
+                  <div class="alert alert-danger mt-1"
+                  *ngIf="detailForm.controls['birthDate'].touched &&
+                  !detailForm.controls['birthDate'].valid"
+                  >
+                  <span *ngIf="detailForm.controls['birthDate'].errors?.['required']">Please input birthDate</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="mb-3">
+                <div>
+                  <label for="basicSalary" class="form-label">Basic Salary</label>
+                  <input 
+                  type="number" 
+                  class="form-control" 
+                  id="basicSalary"
+                  placeholder="Enter your salary"
+                  formControlName="basicSalary"
+                  >
+                  <div class="alert alert-danger mt-1"
+                  *ngIf="detailForm.controls['basicSalary'].touched &&
+                  !detailForm.controls['basicSalary'].valid"
+                  >
+                  <span *ngIf="detailForm.controls['basicSalary'].errors?.['required']">Please input basicSalary</span>
+                  </div>
+                </div>
+                <div>
+                  <label for="status" class="form-label">Status</label>
+                  <input 
+                  type="number" 
+                  class="form-control" 
+                  id="status"
+                  placeholder="0 or 1" 
+                  formControlName="status"
+                  >
+                  <div class="alert alert-danger mt-1"
+                  *ngIf="detailForm.controls['status'].touched &&
+                  !detailForm.controls['status'].valid"
+                  >
+                  <span *ngIf="detailForm.controls['status'].errors?.['required']">Please input status</span>
+                  </div>
+                </div>
+                <div>
+                  <label for="group" class="form-label">Group</label>
+                  <input 
+                  type="text" 
+                  class="form-control" 
+                  id="group"
+                  placeholder="IT or HR"
+                  formControlName="group"
+                  >
+                  <div class="alert alert-danger mt-1"
+                  *ngIf="detailForm.controls['group'].touched &&
+                  !detailForm.controls['group'].valid"
+                  >
+                  <span *ngIf="detailForm.controls['group'].errors?.['required']">Please input group</span>
+                  </div>
+                </div>
+                <div>
+                  <label for="description" class="form-label">Description</label>
+                  <input 
+                  type="text" 
+                  class="form-control" 
+                  id="description"
+                  placeholder="detail information"
+                  formControlName="description"             
+                  >
+                  <div class="alert alert-danger mt-1"
+                  *ngIf="detailForm.controls['description'].touched &&
+                  !detailForm.controls['description'].valid"
+                  >
+                  <span *ngIf="detailForm.controls['description'].errors?.['required']">Please input description</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" [disabled]="detailForm.invalid" (click)="onSubmit()" id="submit">Submit</button>
+      </div>
+    </div>
+  </div>
 </div>

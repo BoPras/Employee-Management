@@ -18,6 +18,7 @@ import { EmployeeService } from './service/employee.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './components/profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FooterComponent,
     EmployeeComponent,
     ProfileComponent,
+    AddEmployeeComponent,
   ],
   imports: [
     BrowserModule,

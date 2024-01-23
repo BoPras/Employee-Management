@@ -10,12 +10,14 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HeaderComponent } from './components/home/header/header.component';
 import { MainComponent } from './components/home/main/main.component';
-import { FooterComponent } from './components/home/footer/footer.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { DataTablesModule } from 'angular-datatables';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { DataServiceService } from './service/data.service.service';
 import { EmployeeService } from './service/employee.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ProfileComponent } from './components/profile/profile.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,13 +30,16 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     MainComponent,
     FooterComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     DataTablesModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     DataServiceService,

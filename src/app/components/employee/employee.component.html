@@ -1,36 +1,30 @@
 <!-- employee.component.html -->
 
 <div>
-    <h2>Employee List</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Username</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Email</th>
-          <th>Birth Date</th>
-          <th>Basic Salary</th>
-          <th>Status</th>
-          <th>Group</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let employee of employees">
-          <td>{{ employee.id }}</td>
-          <td>{{ employee.username }}</td>
-          <td>{{ employee.firstName }}</td>
-          <td>{{ employee.lastName }}</td>
-          <td>{{ employee.email }}</td>
-          <td>{{ employee.birthDate }}</td>
-          <td>{{ employee.basicSalary }}</td>
-          <td>{{ employee.status }}</td>
-          <td>{{ employee.group }}</td>
-          <td>{{ employee.description }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
+  <h2>Employee List</h2>
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Birth Date</th>
+        <th>Basic Salary</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <td>{{ employee.username }}</td>
+        <td>{{ employee.firstName +' '+ employee.lastName}}</td>
+        <td>{{ employee.email }}</td>
+        <td>{{ employee.birthDate }}</td>
+        <td>{{ employee.basicSalary}}</td>
+        <td>
+          <button class="btn btn-sm btn-info" (click)="updateEmployee(employee)">Update</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteEmployee(employee)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

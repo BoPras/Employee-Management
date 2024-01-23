@@ -7,7 +7,4 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EmployeeService extends DataServiceService {
 
-  constructor(http : HttpClient) {
-    super('http://localhost:3000/employees', http)
-   }
 }

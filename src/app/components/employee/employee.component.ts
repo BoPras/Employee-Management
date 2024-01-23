@@ -26,13 +26,13 @@ export class EmployeeComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.formBuilder.group({
       username: ["",Validators.required],
       firstName: ["",Validators.required],
-      lastName: [true],
+      lastName: [],
       birthDate: ["",Validators.required],
       email: ["",Validators.compose([Validators.required, Validators.email])],
       basicSalary: ["",Validators.required],
       status: ["",Validators.required],
       group: ["",Validators.required],
-      description: [true]
+      description: []
     })
   }
 

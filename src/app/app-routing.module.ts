@@ -7,11 +7,15 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AppGuard } from './guard/app-guard';
+import { LoginGuard } from './guard/login-guard';
+
 
 const routes: Routes = [
   {
     path: '',
     component: NavBarComponent,
+    canActivate: [AppGuard],
     children: [
       {
         path: 'home',
@@ -32,7 +36,7 @@ const routes: Routes = [
       }
     ]
   },
-  { path: 'auth/login', component: LoginComponent },
+  { path: 'auth/login', component: LoginComponent ,canActivate: [LoginGuard]},
   { path: 'auth/register', component: RegisterComponent },
   { path: '**', component: NotFoundComponent}
 

@@ -9,6 +9,7 @@ import { ready } from 'jquery';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  logoUrl: string = "../../assets/JJK.png"
   detailForm! : FormGroup;
 
   constructor(private formBuilder: FormBuilder, private route: Router) {

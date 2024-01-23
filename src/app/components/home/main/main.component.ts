@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './main.component.css'
 })
 export class MainComponent {
-
+  imgUrl: string = "../../assets/JJKteam.png"
+  sukunaUrl: string = "../../assets/sukuna.png"
 }

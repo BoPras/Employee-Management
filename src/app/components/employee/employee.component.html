@@ -19,7 +19,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let employee of employees" class="align-middle" [routerLink]="['/employee', employee.id]">
-        <td>{{ employee.username }}</td>
+        <td>{{ employee.username }}</td>  
         <td>{{ employee.firstName +' '+ employee.lastName}}</td>
         <td>{{ employee.email }}</td>
         <td>{{ employee.birthDate | date: 'yyyy-MM-dd'}}</td>
@@ -191,7 +191,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" [disabled]="detailForm.invalid" (click)="onSubmit()" id="submit">Submit</button>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="detailForm.invalid" (click)="onSubmit()" id="submit">Submit</button>
       </div>
     </div>
   </div>

@@ -44,8 +44,8 @@ export class EmployeeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   onSubmit() {
     this.createEmployee();
-    location.reload();
-    // this.route.navigateByUrl('/employees');
+    // location.reload();
+    this.route.navigateByUrl('/employees');
   }
   
   ngOnInit(): void {

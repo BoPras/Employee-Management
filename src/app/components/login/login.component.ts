@@ -10,16 +10,23 @@ import { ready } from 'jquery';
 })
 export class LoginComponent {
   logoUrl: string = "../../assets/JJK.png"
-  detailForm! : FormGroup;
+  detailForm!: FormGroup;
+  error: string ="";
+  dummyUserData = [{
+    email: 'user1@example.com', password: '12345678'
+  }, {
+    email: 'user2@example.com', password: '12345678'
+  }
+  ]
 
   constructor(private formBuilder: FormBuilder, private route: Router) {
     this.detailForm = this.createForm();
   }
 
-  createForm(){
+  createForm() {
     return this.formBuilder.group({
-      email: ["",Validators.compose([Validators.required, Validators.email])],
-      password: ["",Validators.compose([
+      email: ["", Validators.compose([Validators.required, Validators.email])],
+      password: ["", Validators.compose([
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(25),
@@ -28,14 +35,34 @@ export class LoginComponent {
     })
   }
 
-  onSubmit(){
+  onSubmit() {
     this.login();
   }
-  
-  login(){
-    localStorage.setItem('token','1234567890');
-    setTimeout(() => {
-      this.route.navigateByUrl('/home');
-    },300)
+
+  login() {
+    const enteredEmail = this.detailForm.get('email')?.value;
+    const enteredPassword = this.detailForm.get('password')?.value;
+
+    const authenticationUser = this.dummyUserData.find(
+      user => user.email === enteredEmail && user.password === enteredPassword
+    )
+
+    if (authenticationUser) {
+      localStorage.setItem('token', '1234567890');
+      setTimeout(() => {
+        this.route.navigateByUrl('/home');
+      }, 300)
+      confirm('Login Successful')
+    } else {
+      // alert('Invalid username or password')
+      this.error = 'Invalid username or password'
+
+      setTimeout(() => {
+        this.error = '';
+      }, 2000);
+
+      this.detailForm.reset();
+      this.route.navigateByUrl('/auth/login')
+    }
   }
 }

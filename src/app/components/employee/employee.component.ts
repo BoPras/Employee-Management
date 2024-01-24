@@ -30,19 +30,22 @@ export class EmployeeComponent implements OnInit, OnDestroy, AfterViewInit {
       birthDate: ["",Validators.required],
       email: ["",Validators.compose([Validators.required, Validators.email])],
       basicSalary: ["",Validators.required],
-      status: ["",Validators.required],
+      status: [],
       group: ["",Validators.required],
       description: []
     })
   }
 
+  toogleStatus(event : any) {
+    const checkbox = event.target;
+    this.detailForm.get('status')!.setValue(checkbox.checkbox ? 1 : 0);
+    this.detailForm.get('status')!.setValue(undefined ? 0 : 1);
+
+  }
   onSubmit() {
     this.createEmployee();
-    
-    // Navigate to the same route to trigger a page refresh
-    this.route.navigateByUrl('/employees', { skipLocationChange: true }).then(() => {
-      this.route.navigate(['/employees']);
-    });
+    location.reload();
+    // this.route.navigateByUrl('/employees');
   }
   
   ngOnInit(): void {
@@ -83,9 +86,8 @@ export class EmployeeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   updateEmployee(employeeId: string | number) {
-    alert(employeeId);
+    // alert(employeeId);
     const updatedEmployee = {
-      // Add the properties to update
     };
 
     this.service.updateById(employeeId, JSON.stringify(updatedEmployee)).subscribe((data) => {
@@ -94,7 +96,7 @@ export class EmployeeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   deleteEmployee(employeeId: string | number) {
-    alert(employeeId);
+    // alert(employeeId);
     this.service.deleteById(employeeId).subscribe(() => {
       console.log('Employee deleted');
     });

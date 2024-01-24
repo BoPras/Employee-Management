@@ -25,8 +25,8 @@
         <td>{{ employee.birthDate | date: 'yyyy-MM-dd'}}</td>
         <td>{{ employee.basicSalary | currency: 'Rp. '}}</td>
         <td>
-          <button class="btn btn-sm btn-info" (click)="updateEmployee(employee.id)">Update</button>
-          <button class="btn btn-sm btn-danger" (click)="deleteEmployee(employee.id)">Delete</button>
+          <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#updatemodal" (click)="updateEmployee(employee.id)">Update</button>
+          <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deletemodal" (click)="deleteEmployee(employee.id)">Delete</button>
         </td>
       </tr>
     </tbody>
@@ -35,7 +35,7 @@
 
 
 
-<!-- Modal -->
+<!-- Create Modal -->
 <div class="modal fade" id="addEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
@@ -145,19 +145,12 @@
                 </div>
                 <div>
                   <label for="status" class="form-label">Status</label>
-                  <input 
-                  type="number" 
-                  class="form-control" 
+                  <input
+                  type="checkbox" 
+                  class="form-check-input" 
                   id="status"
-                  placeholder="0 or 1" 
                   formControlName="status"
-                  >
-                  <div class="alert alert-danger mt-1"
-                  *ngIf="detailForm.controls['status'].touched &&
-                  !detailForm.controls['status'].valid"
-                  >
-                  <span *ngIf="detailForm.controls['status'].errors?.['required']">Please input status</span>
-                  </div>
+                  (change)="toogleStatus($event)">
                 </div>
                 <div>
                   <label for="group" class="form-label">Group</label>
@@ -199,6 +192,43 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary" [disabled]="detailForm.invalid" (click)="onSubmit()" id="submit">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="updatemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h4 style="background-color: green;">Berhasil Di Update</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deletemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h4 style="background-color: red;">Berhasil Di Delete</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
